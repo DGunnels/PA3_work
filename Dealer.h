@@ -6,15 +6,6 @@ using namespace std;
 
 // Dealer.h
 /*
- * pre-declare
- * class Dealer;
- * class Car;
-
- * Dealer class itself
- * variable - dealerName;
- * variable - dealerNumber;
- * variable - numberOfCars;
- * functions to SET and GET individually
  * -   Add a new car pointer when you use the Dealer default
  * ie. void Dealer(string _name, int _number);
 
@@ -27,6 +18,14 @@ using namespace std;
  * functions to SET and GET individuals
  */
 
+// Pre-declare
+class Car;
+class Dealer;
+
+
+// Defined Dealer
+// - private
+// + public
 class Dealer
 {
 private:
@@ -35,10 +34,12 @@ private:
     int numberCars;
 
 public:
-    Dealer();
-    Dealer(string dealerName, int dealerNumber);
+    Car *carArrayPoint;
 
-    string getdealerName();
+    Dealer();
+    Dealer(string _dealerName, int _dealerNumber, int _numberCars);
+
+    string &getdealerName();
     int getdealerNumber();
     int getnumberCars();
 
@@ -46,7 +47,10 @@ public:
     void setdealerNumber(int dealerNumber);
     void setnumberCars(int numberCars);
 
-
+    friend ostream & operator<< (ostream & out, Dealer & _dealer){
+        return out;
+        // overload operator<< function
+    }
 
 };
 
@@ -61,7 +65,6 @@ private:
     double carPrice;
 public:
     Car();
-    Car(string carMake, string carModel, int carYear, string carVIN, double carPrice);
 
     string getcarMake();
     string getcarModel();
@@ -69,11 +72,16 @@ public:
     int getcarYear();
     double getcarPrice();
 
-    void setcarMake(string carMake);
-    void setcarModel(string carModel);
-    void setcarVIN(string carVIN);
+    void setcarMake(string &carMake);
+    void setcarModel(string &carModel);
+    void setcarVIN(string &carVIN);
     void setcarYear(int carYear);
     void setcarPrice(double carPrice);
+
+    friend ostream & operator<< (ostream & out, Car _car){
+        return out;
+        // overload operator for Car class
+    }
 
 
 };
