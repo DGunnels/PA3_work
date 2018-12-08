@@ -4,10 +4,16 @@
 #include "Dealer.h"
 #include "functions.h"
 using namespace std;
+// Derek Gunnels - 109352533 - CSCI 1410
 
 int main() {
-    vector<string> *vecDealer;
+    vector<Dealer> vecDealers;
     ifstream fileIn("in.txt");
+
+    // variables for reading
+    string fileInput;
+
+
 
     // main.cpp
 
@@ -17,12 +23,21 @@ int main() {
     // Create a for loop switch menu for function option
     // Include the option to go to the upper level. ie. back out of menu
     int menuInput = 0;
-    cout << "Select an option:" << endl;
+    cout << "Option 1: Read in.txt file" << endl <<
+    "Option 2: Display Dealers" << endl <<
+    "Option 3: Choose Dealer and display cars" << endl <<
+    "Option 4: Choose Dealer and add a car" << endl <<
+    "Option 5: Modify a Dealers' car" << endl <<
+    "Option 6: Sort a Dealers' Cars by VIN" << endl <<
+    "Option 7: Write to File out.txt" << endl <<
+    "Option 8: Exit Program" << endl << endl << "Please select an option: " << endl;
     cin >> menuInput;
     while(menuInput != 8){
-        switch(menuInput){
+        switch(menuInput) {
             case 1: // read Dealers and Cars from in.txt
-
+                fileIn.open("in.txt");
+                readFileIn(fileIn, vecDealers);
+                cout << "Testing." << endl;
                 break;
             case 2: // Display Dealers
                 break;
