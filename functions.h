@@ -1,5 +1,10 @@
 #ifndef PA3_FUNCTIONS_H
 #define PA3_FUNCTIONS_H
+#include <iostream>
+#include <fstream>
+#include "Dealer.h"
+#include <vector>
+using namespace std;
 // functions.h
 /*
  * readFile function
@@ -12,6 +17,9 @@
  * writeFile
  * programExit
  */
+
+void readFileIn (ifstream &file, vector<Dealer> &vector);
+
 
 
 
