@@ -6,69 +6,159 @@ using namespace std;
 // Dealer.cpp
 // * use constructors and define implementations for car/dealer
 
-Dealer::Dealer(){}
-Dealer::Dealer(string dealerName, int dealerNumber){}
+Dealer::Dealer(){
+    Dealer::dealerName = "";
+    Dealer::dealerNumber = 0;
+    Dealer::numberCars = 0;
+    Dealer::carArrayPoint = nullptr;
+}
+Dealer::Dealer(string _dealerName, int _dealerNumber, int _numberCars){
+    Dealer::dealerName = _dealerName;
+    Dealer::dealerNumber = _dealerNumber;
+    Dealer::numberCars = _numberCars;
+    Dealer::carArrayPoint = nullptr;
+}
 
-string Dealer::getdealerName() {
-    return dealerName;
+string &Dealer::getdealerName() {
+    return this->dealerName;
 }
 int Dealer::getdealerNumber() {
-    return dealerNumber;
+    return this->dealerNumber;
 }
 int Dealer::getnumberCars() {
-    return numberCars;
+    return this->numberCars;
 }
 
 void Dealer::setdealerName(string dealerName) {
-
+    Dealer::dealerName = dealerName;
 }
 
 void Dealer::setdealerNumber(int dealerNumber) {
-
+    Dealer::dealerNumber = dealerNumber;
 }
 
 void Dealer::setnumberCars(int numberCars) {
-
+    Dealer::numberCars = numberCars;
 }
 
 
 
-Car::Car() {}
-Car::Car(string carMake, string carModel, int carYear, string carVIN, double carPrice) {}
+Car::Car() {
+    Car::carVIN = "";
+    Car::carMake = "";
+    Car::carModel = "";
+    Car::carYear = 0;
+    Car::carPrice = 0.0;
+}
 
-string Car::getcarMake() {
+// Car::Car(string carMake, string carModel, int carYear, string carVIN, double carPrice) {}
+
+string Car::getcarMake() { // get the car make (display)
     return carMake;
 }
-string Car::getcarModel() {
+string Car::getcarModel() { // get the car model (display)
     return carModel;
 }
-string Car::getcarVIN() {
+string Car::getcarVIN() { // get the car vin (display)
     return carVIN;
 }
-int Car::getcarYear() {
+int Car::getcarYear() { // get the car year (display)
     return carYear;
 }
-double Car::getcarPrice() {
+double Car::getcarPrice() { // get the car price (display)
     return carPrice;
 }
 
 
-void Car::setcarMake(string carMake) {
-
+void Car::setcarMake(string &carMake) {
+    Car::carMake = carMake;
 }
 
-void Car::setcarModel(string carModel) {
-
+void Car::setcarModel(string &carModel) {
+    Car::carModel = carModel;
 }
 
-void Car::setcarVIN(string carVIN) {
-
+void Car::setcarVIN(string &carVIN) {
+    Car::carVIN = carVIN;
 }
 
 void Car::setcarYear(int carYear) {
-
+    Car::carYear = carYear;
 }
 
 void Car::setcarPrice(double carPrice) {
-
+    Car::carPrice = carPrice;
 }
+
+void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers){
+    // Variables & other
+    Dealer dealerObj;
+    string dealerName;
+    string carVin;
+    string carMake;
+    string carModel;
+    int dealerNumber;
+    int carYear;
+    int numberCars;
+    double carPrice;
+
+    fileIn.open("in.txt");
+    if (fileIn.is_open()) {
+        while (!fileIn.eof()) {
+            fileIn >> dealerNumber;
+            fileIn.ignore();
+            fileIn >> numberCars;
+            fileIn.ignore();
+            dealerObj.setdealerName(dealerName);
+            dealerObj.setdealerNumber(dealerNumber);
+            dealerObj.setnumberCars(numberCars);
+            dealerObj.carArrayPoint = new Car[numberCars];
+            for (int i = 0; i < numberCars; i++) {
+                // take in vin, make, model, year, price from file
+                getline(fileIn, carVin);
+                cout << carVin;
+                getline(fileIn, carMake);
+                cout << carMake;
+                getline(fileIn, carModel);
+                cout << carModel;
+                fileIn >> carYear;
+                cout << carYear;
+                fileIn.ignore();
+                fileIn >> carPrice;
+                cout << carPrice;
+                fileIn.ignore();
+
+                // Set the vin, make, model, year, price for the car inside of the array
+                dealerObj.carArrayPoint[i].setcarVIN(carVin);
+                dealerObj.carArrayPoint[i].getcarVIN();
+                cout << endl;
+                dealerObj.carArrayPoint[i].setcarMake(carMake);
+                dealerObj.carArrayPoint[i].getcarMake();
+                cout << endl;
+                dealerObj.carArrayPoint[i].setcarModel(carModel);
+                dealerObj.carArrayPoint[i].getcarModel();
+                cout << endl;
+                dealerObj.carArrayPoint[i].setcarYear(carYear);
+                dealerObj.carArrayPoint[i].getcarYear();
+                cout << endl;
+                dealerObj.carArrayPoint[i].setcarPrice(carPrice);
+                dealerObj.carArrayPoint[i].getcarPrice();
+                cout << endl;
+            } // end of for loop
+            vecDealers.push_back(dealerObj);
+            cout << dealerObj;
+        } // end of while loop
+        for (int i = 0; i < vecDealers.size(); i++) {
+            cout << vecDealers[i].getdealerName() << endl;
+            cout << vecDealers[i].getdealerNumber() << endl;
+            cout << vecDealers[i].getnumberCars() << endl;
+            int c = vecDealers[i].getnumberCars();
+            for (int j = 0; j < c; j++) {
+                cout << "The make of the car is: " << vecDealers[i].carArrayPoint[j].getcarMake() << endl;
+            } // end of internal for loop
+        } // end of outer for loop
+    } else {
+        cout << "Error: File not open." << endl;
+    }
+    fileIn.close();
+} // end of readFileIn
