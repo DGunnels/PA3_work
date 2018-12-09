@@ -68,8 +68,10 @@ int main() {
                 break;
 
             case 4: // choose a dealer, display cars, add car
+                addDealerCar(vecDealers);
                 break;
             case 5: // choose dealer, display cars, modify car
+                modDealerCar(vecDealers);
                 break;
             case 6: // choose dealer, sort cars by VIN via bubbleSort; Submenu for ascending and descending
                 break;
