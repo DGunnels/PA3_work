@@ -211,3 +211,44 @@ void displayDealerCars(vector<Dealer> &vecDealers){
         }
     }
 }
+void addDealerCar (vector<Dealer> &vecDealers){
+    int carDisplaySelect = 0;
+    int dealerSelection = 0;
+    while (carDisplaySelect != 2) {
+        cout << "Would you like to select a dealer to add a car to?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
+        cin >> carDisplaySelect;
+                for (int a = 0; a < vecDealers.size(); a++) {
+                    cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
+                }
+                cout << "Select a dealer to add a car: " << endl;
+                cin >> dealerSelection;
+
+                int numberCars = vecDealers[dealerSelection-1].getnumberCars() +1;
+                Car *tempArray = new Car[numberCars];
+                for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
+                    tempArray[i] = vecDealers[dealerSelection-1].carArrayPoint[i];
+                    cout << tempArray[i].getcarMake() << endl;
+                    cout << tempArray[i].getcarModel() << endl;
+                    cout << tempArray[i].getcarVIN() << endl;
+                    cout << tempArray[i].getcarPrice() << endl;
+                    cout << tempArray[i].getcarYear() << endl;
+                }
+                delete[] vecDealers[dealerSelection-1].carArrayPoint;
+                Car *carArrayPoint = new Car[numberCars];
+                vecDealers[dealerSelection-1].carArrayPoint = carArrayPoint;
+                vecDealers[dealerSelection-1].setnumberCars(numberCars);
+                for (int j = 0; j < vecDealers[dealerSelection - 1].getnumberCars()-1; j++) {
+                    vecDealers[dealerSelection-1].carArrayPoint[j] = tempArray[j];
+                    cout << vecDealers[dealerSelection-1].carArrayPoint[j].getcarMake() << endl;
+                    cout << vecDealers[dealerSelection-1].carArrayPoint[j].getcarModel() << endl;
+                    cout << vecDealers[dealerSelection-1].carArrayPoint[j].getcarVIN() << endl;
+                    cout << vecDealers[dealerSelection-1].carArrayPoint[j].getcarPrice() << endl;
+                    cout << vecDealers[dealerSelection-1].carArrayPoint[j].getcarYear() << endl;
+
+        }
+        string carMake;
+                cin >> carMake;
+        vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarMake(carMake);
+        
+    }
+}
