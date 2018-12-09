@@ -40,7 +40,25 @@ int main() {
             } else {
                 cout << "Error." << endl;
             }
+            /*      TEST SECTION FOR ENSURING STORAGE OF VALUES IN POINTER AND VECTOR
+            for (int i = 0; i < 3; i++) {
+                cout << endl << endl << endl;
+                cout << "THIS IS DEALER " << i << ": " << vecDealers[i].getdealerName() << endl;
+                //for (int j = 0; j < 1; j++) {
+                    cout << "THEIR DEALER NUMBER IS: " << vecDealers[i].getdealerNumber() << endl;
+                    cout << "THEIR NUMBER OF CARS IS: " << vecDealers[i].getnumberCars() << endl;
 
+                for (int k = 0; k < vecDealers[i].getnumberCars(); k++) {
+                    cout << "CAR VIN: " << vecDealers[i].carArrayPoint[k].getcarVIN() << endl;
+                    cout << "CAR MAKE: " << vecDealers[i].carArrayPoint[k].getcarMake() << endl;
+                    cout << "CAR MODEL: " << vecDealers[i].carArrayPoint[k].getcarModel() << endl;
+                    cout << "CAR YEAR: " << vecDealers[i].carArrayPoint[k].getcarYear() << endl;
+                    cout << "CAR PRICE: " << vecDealers[i].carArrayPoint[k].getcarPrice() << endl;
+                //}
+            }
+                cout << endl << endl << endl;
+            }
+             */
                 break;
             case 2: // Display Dealers
                 break;
