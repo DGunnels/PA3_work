@@ -21,8 +21,8 @@ using namespace std;
 void readFileIn (ifstream &file, vector<Dealer> &vector);
 void displayDealers (vector<Dealer> &vector);
 void displayDealerCars (vector<Dealer> &vector);
-
-
+void addDealerCar (vector<Dealer> &vector);
+void modDealerCar (vector<Dealer> &vector);
 
 
 
