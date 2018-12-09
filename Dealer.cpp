@@ -215,7 +215,7 @@ void addDealerCar (vector<Dealer> &vecDealers){
     int carDisplaySelect = 0;
     int dealerSelection = 0;
     while (carDisplaySelect != 2) {
-        cout << "Would you like to select a dealer to display?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
+        cout << "Would you like to select a dealer to add a car to?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
         cin >> carDisplaySelect;
         switch(carDisplaySelect) {
             case 1: {
@@ -277,3 +277,104 @@ void addDealerCar (vector<Dealer> &vecDealers){
 
     }
 }
+
+void modDealerCar (vector<Dealer> &vecDealers) {
+    int carDisplaySelect = 0;
+    int dealerSelection = 0;
+    while (carDisplaySelect != 2) {
+        cout << "Would you like to select a dealer to modify a car of?" << endl
+             << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
+        cin >> carDisplaySelect;
+        switch (carDisplaySelect) {
+            case 1: {
+                string carMake;
+                string carModel;
+                string carVIN;
+                int carYear;
+                double carPrice;
+                for (int a = 0; a < vecDealers.size(); a++) {
+                    cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
+                }
+                cout << "Select a dealer to modify a car: " << endl;
+                cin >> dealerSelection;
+
+                cout << "There are " << vecDealers[dealerSelection - 1].getnumberCars() << " cars to choose from."
+                     << endl;
+                //for (int j = 0; j < vecDealers[dealerSelection - 1].getnumberCars(); j++) {
+                    for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
+                        cout << "This is car #" << i + 1 << endl;
+                        cout << "Car Maker: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarMake()
+                             << endl;
+                        cout << "Car Model: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarModel()
+                             << endl;
+                        cout << "Car VIN: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarVIN()
+                             << endl;
+                        cout << "Car Year: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarYear()
+                             << endl;
+                        cout << "Car Price: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarPrice()
+                             << endl << endl;
+                    //}
+                }
+                cout << "Which car would you like to modify?" << endl;
+                int carModSelection;
+                cin >> carModSelection;
+                int modSelOption = 0;
+                cin.ignore();
+
+                while (modSelOption != 6) {
+                    cout << "Please choose from the following: " << endl <<
+                         "1. Maker" << endl <<
+                         "2. Model" << endl <<
+                         "3. VIN" << endl <<
+                         "4. Year" << endl <<
+                         "5. Price" << endl <<
+                         "6. Exit" << endl;
+                    cin >> modSelOption;
+                    switch (modSelOption) {
+                        case 1:
+                            cin.ignore();
+                            cout << "Enter the new Maker: " << endl;
+                            getline(cin, carMake);
+                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarMake(carMake);
+                            break;
+                        case 2:
+                            cin.ignore();
+                            cout << "Enter the new Model: " << endl;
+                            getline(cin, carModel);
+                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarModel(carModel);
+                            break;
+                        case 3:
+                            cin.ignore();
+                            cout << "Enter the new VIN: " << endl;
+                            getline(cin, carVIN);
+                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarVIN(carVIN);
+                            break;
+                        case 4:
+                            cin.ignore();
+                            cout << "Enter the new year: " << endl;
+                            cin >> carYear;
+                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarYear(carYear);
+                            break;
+                        case 5:
+                            cin.ignore();
+                            cout << "Enter the new price: " << endl;
+                            cin >> carPrice;
+                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarPrice(carPrice);
+                            break;
+                        case 6:
+                            cout << "Exiting to Menu." << endl;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+                case 2:
+                    cout << "Returning to menu." << endl;
+                break;
+                default:
+                    break;
+            }
+        }
+    }
