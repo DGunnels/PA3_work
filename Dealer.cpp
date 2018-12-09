@@ -166,3 +166,48 @@ void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers) {
     //}
     cout << "This is after the if and while" << endl;
 } // end of readFileIn
+
+void displayDealers(vector<Dealer> &vecDealers){
+    for(int i = 0; i < vecDealers.size(); i++){
+        cout << "This is Dealer #" << i+1 << ": " << vecDealers[i].getdealerName() << endl;
+    }
+}
+
+void displayDealerCars(vector<Dealer> &vecDealers){
+    int carDisplaySelect = 0;
+    int dealerSelection = 0;
+    while (carDisplaySelect != 2) {
+        cout << "Would you like to select a dealer to display?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
+        cin >> carDisplaySelect;
+        switch (carDisplaySelect) {
+            case 1: { // Yes
+
+                for (int i = 0; i < vecDealers.size(); i++) {
+                    cout << "This is Dealer #" << i + 1 << ": " << vecDealers[i].getdealerName() << endl;
+                }
+                cout << "Select a dealer to display cars: " << endl;
+                cin >> dealerSelection;
+
+                for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++){
+                    cout << "Car Maker: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarMake()
+                         << endl;
+                    cout << "Car Model: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarModel()
+                         << endl;
+                    cout << "Car VIN: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarVIN()
+                         << endl;
+                    cout << "Car Year: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarYear()
+                         << endl;
+                    cout << "Car Price: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarPrice()
+                         << endl;
+                }
+
+                break;
+            }
+            case 2: // No
+                cout << "Returning to main menu." << endl;
+                break;
+            default: // catch-all
+                break;
+        }
+    }
+}
