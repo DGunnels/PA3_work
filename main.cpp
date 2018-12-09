@@ -4,7 +4,6 @@
 #include "Dealer.h"
 #include "functions.h"
 using namespace std;
-// Derek Gunnels - 109352533 - CSCI 1410
 // Utilized personal github for transferring between laptop and desktop for coding purposes. This code exists in a repo on github on my personal github account.
 
 int main() {
