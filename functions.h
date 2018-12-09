@@ -19,8 +19,8 @@ using namespace std;
  */
 
 void readFileIn (ifstream &file, vector<Dealer> &vector);
-
-
+void displayDealers (vector<Dealer> &vector);
+void displayDealerCars (vector<Dealer> &vector);
 
 
 
