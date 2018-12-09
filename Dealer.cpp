@@ -219,50 +219,50 @@ void addDealerCar (vector<Dealer> &vecDealers){
         cin >> carDisplaySelect;
         switch(carDisplaySelect) {
             case 1: {
+                string carMake;
+                string carVIN;
+                string carModel;
+                int carYear;
+                double carPrice;
+
                 for (int a = 0; a < vecDealers.size(); a++) {
                     cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
                 }
                 cout << "Select a dealer to add a car: " << endl;
                 cin >> dealerSelection;
 
+
                 int numberCars = vecDealers[dealerSelection - 1].getnumberCars() + 1;
                 Car *tempArray = new Car[numberCars];
-                for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
+
+                 for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
                     tempArray[i] = vecDealers[dealerSelection - 1].carArrayPoint[i];
-                    cout << tempArray[i].getcarMake() << endl;
-                    cout << tempArray[i].getcarModel() << endl;
-                    cout << tempArray[i].getcarVIN() << endl;
-                    cout << tempArray[i].getcarPrice() << endl;
-                    cout << tempArray[i].getcarYear() << endl;
+                    //cout << tempArray[i].getcarMake() << endl;
+                    //cout << tempArray[i].getcarModel() << endl;
+                    //cout << tempArray[i].getcarVIN() << endl;
+                    //cout << tempArray[i].getcarPrice() << endl;
+                    //cout << tempArray[i].getcarYear() << endl;
                 }
+
                 delete[] vecDealers[dealerSelection - 1].carArrayPoint;
                 vecDealers[dealerSelection - 1].carArrayPoint = tempArray;
                 vecDealers[dealerSelection - 1].setnumberCars(numberCars);
-                
-                string carMake;
-                string carVIN;
-                string carModel;
-                int carYear;
-                double carPrice;
+                cin.ignore();
                 cout << "Please enter the VIN: " << endl;
                 getline(cin, carVIN);
-                cin.ignore();
                 vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarVIN(carVIN);
                 cout << "Please enter the Maker: " << endl;
                 getline(cin, carMake);
-                cin.ignore();
                 vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarMake(carMake);
                 cout << "Please enter the Model: " << endl;
                 getline(cin, carModel);
-                cin.ignore();
                 vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarModel(carModel);
                 cout << "Please enter the Year: " << endl;
                 cin >> carYear;
-                cin.ignore();
                 vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarYear(carYear);
                 cout << "Please enter the Price: " << endl;
                 cin >> carPrice;
-                cin.ignore();
+                //cin.ignore();
                 vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarPrice(carPrice);
             }
             break;
