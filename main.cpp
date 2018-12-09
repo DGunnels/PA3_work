@@ -61,8 +61,43 @@ int main() {
              */
                 break;
             case 2: // Display Dealers
+            displayDealers(vecDealers);
                 break;
             case 3: // choose a dealer, display cars
+                int carDisplaySelect = 0;
+                int dealerSelection = 0;
+                while (carDisplaySelect != 3) {
+                    cout << "Would you like to select a dealer to display?" << endl;
+                    cin >> carDisplaySelect;
+                    switch (carDisplaySelect) {
+                        case 1: // Yes
+
+                            for (int i = 0; i < vecDealers.size(); i++) {
+                                cout << "This is Dealer #" << i + 1 << ": " << vecDealers[i].getdealerName() << endl;
+                            }
+                            cout << "Select a dealer to display cars: " << endl;
+                            cin >> dealerSelection;
+
+                            for (int i = 0; i < dealerSelection - 1; i++) {
+                                cout << "Car Maker: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarMake()
+                                     << endl;
+                                cout << "Car Model: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarModel()
+                                     << endl;
+                                cout << "Car VIN: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarVIN()
+                                     << endl;
+                                cout << "Car Year: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarYear()
+                                     << endl;
+                                cout << "Car Price: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarPrice()
+                                     << endl;
+                            }
+                            break;
+                        case 2: // No
+                            cout << "Returning to main menu." << endl;
+                            break;
+                        default: // catch-all
+                            break;
+                    }
+                }
                 break;
             case 4: // choose a dealer, display cars, add car
                 break;
