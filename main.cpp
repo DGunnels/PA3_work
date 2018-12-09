@@ -8,12 +8,9 @@ using namespace std;
 
 int main() {
     vector<Dealer> vecDealers;
-    ifstream fileIn("in.txt");
-
+    ifstream fileIn;
     // variables for reading
     string fileInput;
-
-
 
     // main.cpp
 
@@ -23,21 +20,27 @@ int main() {
     // Create a for loop switch menu for function option
     // Include the option to go to the upper level. ie. back out of menu
     int menuInput = 0;
-    cout << "Option 1: Read in.txt file" << endl <<
-    "Option 2: Display Dealers" << endl <<
-    "Option 3: Choose Dealer and display cars" << endl <<
-    "Option 4: Choose Dealer and add a car" << endl <<
-    "Option 5: Modify a Dealers' car" << endl <<
-    "Option 6: Sort a Dealers' Cars by VIN" << endl <<
-    "Option 7: Write to File out.txt" << endl <<
-    "Option 8: Exit Program" << endl << endl << "Please select an option: " << endl;
-    cin >> menuInput;
     while(menuInput != 8){
+        cout << "Option 1: Read in.txt file" << endl <<
+             "Option 2: Display Dealers" << endl <<
+             "Option 3: Choose Dealer and display cars" << endl <<
+             "Option 4: Choose Dealer and add a car" << endl <<
+             "Option 5: Modify a Dealers' car" << endl <<
+             "Option 6: Sort a Dealers' Cars by VIN" << endl <<
+             "Option 7: Write to File out.txt" << endl <<
+             "Option 8: Exit Program" << endl << endl << "Please select an option: " << endl;
+        cin >> menuInput;
         switch(menuInput) {
             case 1: // read Dealers and Cars from in.txt
-                fileIn.open("in.txt");
+
+            fileIn.open("in.txt");
+            if(fileIn.is_open()) {
+                cout << "The file opened." << endl;
                 readFileIn(fileIn, vecDealers);
-                cout << "Testing." << endl;
+            } else {
+                cout << "Error." << endl;
+            }
+
                 break;
             case 2: // Display Dealers
                 break;
