@@ -1,6 +1,7 @@
 #include "Dealer.h"
 #include "functions.h"
 #include <vector>
+#include <fstream>
 #include <iostream>
 using namespace std;
 // Dealer.cpp
@@ -90,7 +91,7 @@ void Car::setcarPrice(double carPrice) {
     Car::carPrice = carPrice;
 }
 
-void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers){
+void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers) {
     // Variables & other
     Dealer dealerObj;
     string dealerName;
@@ -98,16 +99,19 @@ void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers){
     string carMake;
     string carModel;
     int dealerNumber;
+
     int carYear;
     int numberCars;
     double carPrice;
 
-    fileIn.open("in.txt");
-    if (fileIn.is_open()) {
-        while (!fileIn.eof()) {
+    cout << "This is before the if and while" << endl;
+        while (getline(fileIn, dealerName)) {
+            // cout << dealerName << endl;
             fileIn >> dealerNumber;
+            // cout << dealerNumber << endl;
             fileIn.ignore();
             fileIn >> numberCars;
+            // cout << numberCars << endl;
             fileIn.ignore();
             dealerObj.setdealerName(dealerName);
             dealerObj.setdealerNumber(dealerNumber);
@@ -115,50 +119,50 @@ void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers){
             dealerObj.carArrayPoint = new Car[numberCars];
             for (int i = 0; i < numberCars; i++) {
                 // take in vin, make, model, year, price from file
+
                 getline(fileIn, carVin);
-                cout << carVin;
+                // cout << "Car VIN: " << carVin << endl;
                 getline(fileIn, carMake);
-                cout << carMake;
+                // cout << "Car Make: " << carMake << endl;
                 getline(fileIn, carModel);
-                cout << carModel;
+                // cout << "Car Model: " << carModel << endl;
                 fileIn >> carYear;
-                cout << carYear;
+                // cout << "Car Year: " << carYear << endl;
                 fileIn.ignore();
                 fileIn >> carPrice;
-                cout << carPrice;
+                // cout << "Car Price: " << carPrice << endl;
                 fileIn.ignore();
 
                 // Set the vin, make, model, year, price for the car inside of the array
                 dealerObj.carArrayPoint[i].setcarVIN(carVin);
-                dealerObj.carArrayPoint[i].getcarVIN();
-                cout << endl;
+                // cout << "VIN: " << dealerObj.carArrayPoint[i].getcarVIN();
+                // cout << endl;
                 dealerObj.carArrayPoint[i].setcarMake(carMake);
-                dealerObj.carArrayPoint[i].getcarMake();
-                cout << endl;
+                // cout << "MAKE: " << dealerObj.carArrayPoint[i].getcarMake();
+                // cout << endl;
                 dealerObj.carArrayPoint[i].setcarModel(carModel);
-                dealerObj.carArrayPoint[i].getcarModel();
-                cout << endl;
+                // cout << "MODEL: " << dealerObj.carArrayPoint[i].getcarModel();
+                // cout << endl;
                 dealerObj.carArrayPoint[i].setcarYear(carYear);
-                dealerObj.carArrayPoint[i].getcarYear();
-                cout << endl;
+                // cout << "YEAR: " << dealerObj.carArrayPoint[i].getcarYear();
+                // cout << endl;
                 dealerObj.carArrayPoint[i].setcarPrice(carPrice);
-                dealerObj.carArrayPoint[i].getcarPrice();
-                cout << endl;
+                // cout << "PRICE: " << dealerObj.carArrayPoint[i].getcarPrice();
+                // cout << endl;
             } // end of for loop
             vecDealers.push_back(dealerObj);
-            cout << dealerObj;
         } // end of while loop
         for (int i = 0; i < vecDealers.size(); i++) {
-            cout << vecDealers[i].getdealerName() << endl;
-            cout << vecDealers[i].getdealerNumber() << endl;
-            cout << vecDealers[i].getnumberCars() << endl;
+            cout << "DEALER NAME: " <<  vecDealers[i].getdealerName() << endl;
+            cout << "DEALER NUMBER: " << vecDealers[i].getdealerNumber() << endl;
+            cout << "NUMBER OF CARS: " << vecDealers[i].getnumberCars() << endl;
             int c = vecDealers[i].getnumberCars();
             for (int j = 0; j < c; j++) {
                 cout << "The make of the car is: " << vecDealers[i].carArrayPoint[j].getcarMake() << endl;
             } // end of internal for loop
         } // end of outer for loop
-    } else {
-        cout << "Error: File not open." << endl;
-    }
-    fileIn.close();
+    //} else {
+    //    cout << "Error: File not open." << endl;
+    //}
+    cout << "This is after the if and while" << endl;
 } // end of readFileIn
