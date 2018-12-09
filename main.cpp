@@ -5,10 +5,12 @@
 #include "functions.h"
 using namespace std;
 // Derek Gunnels - 109352533 - CSCI 1410
+// Utilized personal github for transferring between laptop and desktop for coding purposes. This code exists in a repo on github on my personal github account.
 
 int main() {
     vector<Dealer> vecDealers;
     ifstream fileIn;
+    ofstream fileOut;
     // variables for reading
     string fileInput;
 
@@ -74,8 +76,12 @@ int main() {
                 modDealerCar(vecDealers);
                 break;
             case 6: // choose dealer, sort cars by VIN via bubbleSort; Submenu for ascending and descending
+                cout << "Not implemented." << endl << endl;
                 break;
             case 7: // Write dealers and cars to file out.txt
+                fileOut.open("out.txt");
+                writeFileout(fileOut, vecDealers);
+                fileOut.close();
                 break;
             case 8: // Exit program
                 break;
