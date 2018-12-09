@@ -215,48 +215,65 @@ void addDealerCar (vector<Dealer> &vecDealers){
     int carDisplaySelect = 0;
     int dealerSelection = 0;
     while (carDisplaySelect != 2) {
-        cout << "Would you like to select a dealer to add a car to?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
+        cout << "Would you like to select a dealer to display?" << endl << "Enter 1 to display Dealers. Enter 2 to return to the main menu." << endl;
         cin >> carDisplaySelect;
+        switch(carDisplaySelect) {
+            case 1: {
                 for (int a = 0; a < vecDealers.size(); a++) {
                     cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
                 }
                 cout << "Select a dealer to add a car: " << endl;
                 cin >> dealerSelection;
 
-                int numberCars = vecDealers[dealerSelection-1].getnumberCars() +1;
+                int numberCars = vecDealers[dealerSelection - 1].getnumberCars() + 1;
                 Car *tempArray = new Car[numberCars];
                 for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
-                    tempArray[i] = vecDealers[dealerSelection-1].carArrayPoint[i];
+                    tempArray[i] = vecDealers[dealerSelection - 1].carArrayPoint[i];
                     cout << tempArray[i].getcarMake() << endl;
                     cout << tempArray[i].getcarModel() << endl;
                     cout << tempArray[i].getcarVIN() << endl;
                     cout << tempArray[i].getcarPrice() << endl;
                     cout << tempArray[i].getcarYear() << endl;
                 }
-                delete[] vecDealers[dealerSelection-1].carArrayPoint;
-
-                vecDealers[dealerSelection-1].carArrayPoint = tempArray;
-                vecDealers[dealerSelection-1].setnumberCars(numberCars);
+                delete[] vecDealers[dealerSelection - 1].carArrayPoint;
+                vecDealers[dealerSelection - 1].carArrayPoint = tempArray;
+                vecDealers[dealerSelection - 1].setnumberCars(numberCars);
+                
                 string carMake;
                 string carVIN;
                 string carModel;
                 int carYear;
                 double carPrice;
                 cout << "Please enter the VIN: " << endl;
-                cin >> carVIN;
+                getline(cin, carVIN);
+                cin.ignore();
+                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarVIN(carVIN);
                 cout << "Please enter the Maker: " << endl;
-                cin >> carMake;
+                getline(cin, carMake);
+                cin.ignore();
+                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarMake(carMake);
                 cout << "Please enter the Model: " << endl;
-                cin >> carModel;
+                getline(cin, carModel);
+                cin.ignore();
+                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarModel(carModel);
                 cout << "Please enter the Year: " << endl;
                 cin >> carYear;
+                cin.ignore();
+                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarYear(carYear);
                 cout << "Please enter the Price: " << endl;
                 cin >> carPrice;
-                vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarVIN(carVIN);
-                vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarMake(carMake);
-                vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarModel(carModel);
-                vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarYear(carYear);
-                vecDealers[dealerSelection-1].carArrayPoint[numberCars].setcarPrice(carPrice);
+                cin.ignore();
+                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarPrice(carPrice);
+            }
+            break;
+            case 2:
+                cout << "Exiting to Menu." << endl;
+                break;
+            default:
+                break;
+        }
+
+
 
     }
 }
