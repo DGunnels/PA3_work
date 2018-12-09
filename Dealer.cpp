@@ -104,7 +104,6 @@ void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers) {
     int numberCars;
     double carPrice;
 
-    cout << "This is before the if and while" << endl;
         while (getline(fileIn, dealerName)) {
             // cout << dealerName << endl;
             fileIn >> dealerNumber;
@@ -152,24 +151,11 @@ void readFileIn(ifstream &fileIn, vector<Dealer> &vecDealers) {
             } // end of for loop
             vecDealers.push_back(dealerObj);
         } // end of while loop
-        for (int i = 0; i < vecDealers.size(); i++) {
-            cout << "DEALER NAME: " <<  vecDealers[i].getdealerName() << endl;
-            cout << "DEALER NUMBER: " << vecDealers[i].getdealerNumber() << endl;
-            cout << "NUMBER OF CARS: " << vecDealers[i].getnumberCars() << endl;
-            int c = vecDealers[i].getnumberCars();
-            for (int j = 0; j < c; j++) {
-                cout << "The make of the car is: " << vecDealers[i].carArrayPoint[j].getcarMake() << endl;
-            } // end of internal for loop
-        } // end of outer for loop
-    //} else {
-    //    cout << "Error: File not open." << endl;
-    //}
-    cout << "This is after the if and while" << endl;
 } // end of readFileIn
 
 void displayDealers(vector<Dealer> &vecDealers){
     for(int i = 0; i < vecDealers.size(); i++){
-        cout << "This is Dealer #" << i+1 << ": " << vecDealers[i].getdealerName() << endl;
+        cout << "This is Dealer #" << vecDealers[i].getdealerNumber() << ": " << vecDealers[i].getdealerName() << endl << endl;
     }
 }
 
@@ -183,22 +169,34 @@ void displayDealerCars(vector<Dealer> &vecDealers){
             case 1: { // Yes
 
                 for (int i = 0; i < vecDealers.size(); i++) {
-                    cout << "This is Dealer #" << i + 1 << ": " << vecDealers[i].getdealerName() << endl;
+                    cout << "This is Dealer #" << vecDealers[i].getdealerNumber() << ": " << vecDealers[i].getdealerName() << endl << endl;
                 }
                 cout << "Select a dealer to display cars: " << endl;
                 cin >> dealerSelection;
+                int dealerIndex = -1;
 
-                for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++){
-                    cout << "Car Maker: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarMake()
+                for(int a = 0; a < vecDealers.size(); a++){
+                    if(dealerSelection == vecDealers[a].getdealerNumber()){
+                        dealerIndex = a;
+                    }
+                }
+                if(dealerIndex == -1){
+                    cout << "That is not a valid selection." << endl;
+                    break;
+                }
+
+                for (int i = 0; i < vecDealers[dealerIndex].getnumberCars(); i++){
+                    cout << "Car Maker: " << vecDealers[dealerIndex].carArrayPoint[i].getcarMake()
                          << endl;
-                    cout << "Car Model: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarModel()
+                    cout << "Car Model: " << vecDealers[dealerIndex].carArrayPoint[i].getcarModel()
                          << endl;
-                    cout << "Car VIN: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarVIN()
+                    cout << "Car VIN: " << vecDealers[dealerIndex].carArrayPoint[i].getcarVIN()
                          << endl;
-                    cout << "Car Year: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarYear()
+                    cout << "Car Year: " << vecDealers[dealerIndex].carArrayPoint[i].getcarYear()
                          << endl;
-                    cout << "Car Price: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarPrice()
-                         << endl;
+                    cout << "Car Price: " << vecDealers[dealerIndex].carArrayPoint[i].getcarPrice()
+                         << endl << endl;
+
                 }
 
                 break;
@@ -226,17 +224,28 @@ void addDealerCar (vector<Dealer> &vecDealers){
                 double carPrice;
 
                 for (int a = 0; a < vecDealers.size(); a++) {
-                    cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
+                    cout << "This is Dealer #" << vecDealers[a].getdealerNumber() << ": " << vecDealers[a].getdealerName() << endl << endl;
                 }
                 cout << "Select a dealer to add a car: " << endl;
                 cin >> dealerSelection;
+                int dealerIndex = -1;
+
+                for(int a = 0; a < vecDealers.size(); a++){
+                    if(dealerSelection == vecDealers[a].getdealerNumber()){
+                        dealerIndex = a;
+                    }
+                }
+                if(dealerIndex == -1){
+                    cout << "That is not a valid selection." << endl;
+                    break;
+                }
 
 
-                int numberCars = vecDealers[dealerSelection - 1].getnumberCars() + 1;
+                int numberCars = vecDealers[dealerIndex].getnumberCars() + 1;
                 Car *tempArray = new Car[numberCars];
 
-                 for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
-                    tempArray[i] = vecDealers[dealerSelection - 1].carArrayPoint[i];
+                 for (int i = 0; i < vecDealers[dealerIndex].getnumberCars(); i++) {
+                    tempArray[i] = vecDealers[dealerIndex].carArrayPoint[i];
                     //cout << tempArray[i].getcarMake() << endl;
                     //cout << tempArray[i].getcarModel() << endl;
                     //cout << tempArray[i].getcarVIN() << endl;
@@ -244,26 +253,26 @@ void addDealerCar (vector<Dealer> &vecDealers){
                     //cout << tempArray[i].getcarYear() << endl;
                 }
 
-                delete[] vecDealers[dealerSelection - 1].carArrayPoint;
-                vecDealers[dealerSelection - 1].carArrayPoint = tempArray;
-                vecDealers[dealerSelection - 1].setnumberCars(numberCars);
+                delete[] vecDealers[dealerIndex].carArrayPoint;
+                vecDealers[dealerIndex].carArrayPoint = tempArray;
+                vecDealers[dealerIndex].setnumberCars(numberCars);
                 cin.ignore();
                 cout << "Please enter the VIN: " << endl;
                 getline(cin, carVIN);
-                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarVIN(carVIN);
+                vecDealers[dealerIndex].carArrayPoint[numberCars - 1].setcarVIN(carVIN);
                 cout << "Please enter the Maker: " << endl;
                 getline(cin, carMake);
-                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarMake(carMake);
+                vecDealers[dealerIndex].carArrayPoint[numberCars - 1].setcarMake(carMake);
                 cout << "Please enter the Model: " << endl;
                 getline(cin, carModel);
-                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarModel(carModel);
+                vecDealers[dealerIndex].carArrayPoint[numberCars - 1].setcarModel(carModel);
                 cout << "Please enter the Year: " << endl;
                 cin >> carYear;
-                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarYear(carYear);
+                vecDealers[dealerIndex].carArrayPoint[numberCars - 1].setcarYear(carYear);
                 cout << "Please enter the Price: " << endl;
                 cin >> carPrice;
                 //cin.ignore();
-                vecDealers[dealerSelection - 1].carArrayPoint[numberCars - 1].setcarPrice(carPrice);
+                vecDealers[dealerIndex].carArrayPoint[numberCars - 1].setcarPrice(carPrice);
             }
             break;
             case 2:
@@ -293,25 +302,37 @@ void modDealerCar (vector<Dealer> &vecDealers) {
                 int carYear;
                 double carPrice;
                 for (int a = 0; a < vecDealers.size(); a++) {
-                    cout << "This is Dealer #" << a + 1 << ": " << vecDealers[a].getdealerName() << endl;
+                    cout << "This is Dealer #" << vecDealers[a].getdealerNumber() << ": " << vecDealers[a].getdealerName() << endl << endl;
                 }
                 cout << "Select a dealer to modify a car: " << endl;
                 cin >> dealerSelection;
+                int dealerIndex = -1;
 
-                cout << "There are " << vecDealers[dealerSelection - 1].getnumberCars() << " cars to choose from."
+                for(int a = 0; a < vecDealers.size(); a++){
+                    if(dealerSelection == vecDealers[a].getdealerNumber()){
+                        dealerIndex = a;
+                    }
+                }
+                if(dealerIndex == -1){
+                    cout << "That is not a valid selection." << endl;
+                    break;
+                }
+
+
+                cout << "There are " << vecDealers[dealerIndex].getnumberCars() << " cars to choose from."
                      << endl;
                 //for (int j = 0; j < vecDealers[dealerSelection - 1].getnumberCars(); j++) {
-                    for (int i = 0; i < vecDealers[dealerSelection - 1].getnumberCars(); i++) {
+                    for (int i = 0; i < vecDealers[dealerIndex].getnumberCars(); i++) {
                         cout << "This is car #" << i + 1 << endl;
-                        cout << "Car Maker: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarMake()
+                        cout << "Car Maker: " << vecDealers[dealerIndex].carArrayPoint[i].getcarMake()
                              << endl;
-                        cout << "Car Model: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarModel()
+                        cout << "Car Model: " << vecDealers[dealerIndex].carArrayPoint[i].getcarModel()
                              << endl;
-                        cout << "Car VIN: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarVIN()
+                        cout << "Car VIN: " << vecDealers[dealerIndex].carArrayPoint[i].getcarVIN()
                              << endl;
-                        cout << "Car Year: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarYear()
+                        cout << "Car Year: " << vecDealers[dealerIndex].carArrayPoint[i].getcarYear()
                              << endl;
-                        cout << "Car Price: " << vecDealers[dealerSelection - 1].carArrayPoint[i].getcarPrice()
+                        cout << "Car Price: " << vecDealers[dealerIndex].carArrayPoint[i].getcarPrice()
                              << endl << endl;
                     //}
                 }
@@ -335,31 +356,31 @@ void modDealerCar (vector<Dealer> &vecDealers) {
                             cin.ignore();
                             cout << "Enter the new Maker: " << endl;
                             getline(cin, carMake);
-                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarMake(carMake);
+                            vecDealers[dealerIndex].carArrayPoint[carModSelection-1].setcarMake(carMake);
                             break;
                         case 2:
                             cin.ignore();
                             cout << "Enter the new Model: " << endl;
                             getline(cin, carModel);
-                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarModel(carModel);
+                            vecDealers[dealerIndex].carArrayPoint[carModSelection-1].setcarModel(carModel);
                             break;
                         case 3:
                             cin.ignore();
                             cout << "Enter the new VIN: " << endl;
                             getline(cin, carVIN);
-                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarVIN(carVIN);
+                            vecDealers[dealerIndex].carArrayPoint[carModSelection-1].setcarVIN(carVIN);
                             break;
                         case 4:
                             cin.ignore();
                             cout << "Enter the new year: " << endl;
                             cin >> carYear;
-                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarYear(carYear);
+                            vecDealers[dealerIndex].carArrayPoint[carModSelection-1].setcarYear(carYear);
                             break;
                         case 5:
                             cin.ignore();
                             cout << "Enter the new price: " << endl;
                             cin >> carPrice;
-                            vecDealers[dealerSelection - 1].carArrayPoint[carModSelection-1].setcarPrice(carPrice);
+                            vecDealers[dealerIndex].carArrayPoint[carModSelection-1].setcarPrice(carPrice);
                             break;
                         case 6:
                             cout << "Exiting to Menu." << endl;
@@ -378,3 +399,19 @@ void modDealerCar (vector<Dealer> &vecDealers) {
             }
         }
     }
+
+
+void writeFileout(ofstream &fileOut, vector<Dealer> &vecDealers) {
+    for(int a = 0; a < vecDealers.size(); a++){
+        fileOut << vecDealers[a].getdealerName() << endl;
+        fileOut << vecDealers[a].getdealerNumber() << endl;
+        fileOut << vecDealers[a].getnumberCars() << endl;
+        for(int b = 0; b < vecDealers[a].getnumberCars(); b++) {
+            fileOut << vecDealers[a].carArrayPoint[b].getcarVIN() << endl;
+            fileOut << vecDealers[a].carArrayPoint[b].getcarMake() << endl;
+            fileOut << vecDealers[a].carArrayPoint[b].getcarModel() << endl;
+            fileOut << vecDealers[a].carArrayPoint[b].getcarYear() << endl;
+            fileOut << vecDealers[a].carArrayPoint[b].getcarPrice() << endl;
+        }
+    }
+}
